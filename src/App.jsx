@@ -1,9 +1,15 @@
 import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import BlogRoutes from "./BlogRoutes";
 
 function App() {
   return (
-    <div>
-      <h1>ReactBlog</h1>
+    <div className="App">
+      <BrowserRouter>
+        <div className="container">
+          <BlogRoutes/>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
