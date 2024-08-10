@@ -1,0 +1,13 @@
+:root {
+    --color-seccond: #F5EDED;
+    --color-emphasis: #6482AD;
+}
+
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
