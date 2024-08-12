@@ -1,0 +1,8 @@
+.login{
+    text-align: center;
+}
+
+.login a{
+    color: var(--color-emphasis);
+    text-decoration: underline;
+}
