@@ -31,15 +31,9 @@
 }
 
 .links_list li a {
-  padding: 0.4em 0.6em;
-  border-radius: 5px;
+  padding: 0.1em 0.6em;
 }
 
 .active {
-  background: rgb(187, 198, 255);
-  background: radial-gradient(
-    circle,
-    var(--color-seccond) 20%,
-    var(--color-emphasis) 100%
-  );
+  border-bottom: 2px solid var(--color-emphasis);
 }
