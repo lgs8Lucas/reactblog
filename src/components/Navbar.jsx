@@ -14,6 +14,9 @@ const Navbar = () => {
           <NavLink className={({isActive}) => isActive? styles.active:''} to="/">Início</NavLink>
         </li>
         <li>
+          <NavLink className={({isActive}) => isActive? styles.active:''} to="/login">Entrar</NavLink>
+        </li>
+        <li>
           <NavLink className={({isActive}) => isActive? styles.active:''} to="/about" >Sobre</NavLink>
         </li>
       </ul>

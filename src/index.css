@@ -20,6 +20,11 @@ textarea:focus {
   outline: none;
 }
 
+input::placeholder,
+textarea::placeholder{
+  color: #AAA;
+}
+
 a,
 nav button {
   text-decoration: none;
@@ -33,4 +38,77 @@ nav button {
 a:hover,
 nav button:hover {
   color: #b0b0b0;
+}
+
+form {
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+label span{
+  margin-bottom: .3em;
+  font-weight: 600;
+  text-align: left;
+}
+
+input, textarea{
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: .8em 0;
+  background-color: transparent;
+}
+
+.btn{
+  background-color: #399918;
+  color: var(--color-base);
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  padding: 7px 12px;
+  font-size: 1em;
+}
+
+.btn.btn-dark{
+  background-color: #000;
+}
+
+.btn.btn-outline{
+  background-color: transparent;
+  color: #000;
+  border: 1px solid black;
+  padding: 7px 30px;
+}
+
+.btn:hover{
+  background-color: #399918a1;
+}
+
+.btn.btn-outline{
+  background-color: #000;
+  color: var(--color-base);
+}
+
+.btn.btn-danger:hover{
+  background-color: #E4003A;
+}
+
+button[disabled]{
+  background-color: #AAA;
+}
+
+.container .error{
+  color: #C80036;
+  background-color: #f5ededa2;
+  border: 1px solid #C80036;
+  padding: 5px;
+  border-radius: 5px;
 }
