@@ -37,3 +37,7 @@
 .active {
   border-bottom: 2px solid var(--color-emphasis);
 }
+
+.navbar a, .navbar button{
+  font-size: 1em;
+}
