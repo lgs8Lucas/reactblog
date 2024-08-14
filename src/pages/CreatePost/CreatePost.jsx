@@ -18,6 +18,8 @@ const CreatePost = () => {
 
 	const { insertDocument, response } = useInsertDocument("posts");
 
+	const navigate = useNavigate();
+
 	const { user } = useAuthValue();
 
 	const handleChange = (e) => {
@@ -30,15 +32,39 @@ const CreatePost = () => {
 		e.preventDefault();
 		setFormError("");
 
-		//validar URL da imagem
-
 		//Criar array de tags
-
+		const tagsArray = post.tags.split(",").map(tag => tag.trim().toLowerCase())
+		
 		//Checar valores
+		if (!post.title || !post.tags || !post.body) {
+			setFormError("Por favor, preencha todos os campos requiridos!")
+		}
+		
+		let doc = {
+			title: post.title,
+			body: post.body,
+			tags: tagsArray,
+			uid: user.uid,
+			createdby: user.displayName,
+		};
 
-		insertDocument({ ...post, uid: user.uid, createdby: user.displayName });
+		if (post.img) {
+			//validar URL da imagem
+			try {
+				new URL(post.img);
+				doc = {...doc, img:post.img}
+			} catch (error) {
+				setFormError("Por favor insira uma url de imagem válida ou deixe o campo de imagem vazio!");
+				
+			}
+		}
+
+		if (formError) return;
+
+		insertDocument(doc);
 
 		//Redirect
+		navigate('/')
 	};
 
 	return (
@@ -91,6 +117,7 @@ const CreatePost = () => {
 					{response.loading ? "Aguarde" : "Postar"}
 				</button>
 				{response.error && <p className="error">{response.error}</p>}
+				{formError && <p className="error">{formError}</p>}
 			</form>
 		</div>
 	);
