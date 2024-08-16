@@ -5,18 +5,23 @@ import { Link } from "react-router-dom";
 
 const PostDetail = ({ post }) => {
 	return (
-		<div className={styles.post}>
+		<div className={styles.post_detail}>
 			<h2>{post.title}</h2>
 			{post.img ? <img src={post.img} alt={post.title} /> : <p>{post.body}</p>}
-			<p>{post.createdBy}</p>
-			<div>
+			<p className={styles.createdby}>@{post.createdby}</p>
+			<div className={styles.tags}>
 				{post.tags.map((tag, i) => (
 					<p key={tag + i}>
-						<span>#{tag}</span>
+						<span>#</span>
+						{tag}
 					</p>
 				))}
 			</div>
-			<Link to={`/posts/${post.id}`} className="btn btn-outline">Ver detalhes</Link>
+			<div className={styles.footer}>
+				<Link to={`/posts/${post.id}`} className="btn btn-outline">
+					Ver detalhes
+				</Link>
+			</div>
 		</div>
 	);
 };

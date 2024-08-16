@@ -81,6 +81,10 @@ input, textarea{
   background-color: #000;
 }
 
+.btn.btn-dark:hover{
+  background-color: #333;
+}
+
 .btn.btn-outline{
   background-color: transparent;
   color: #000;
@@ -92,7 +96,7 @@ input, textarea{
   background-color: #399918a1;
 }
 
-.btn.btn-outline{
+.btn.btn-outline:hover{
   background-color: #000;
   color: var(--color-base);
 }
