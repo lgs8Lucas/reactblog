@@ -9,10 +9,14 @@ import PostDetail from "../../components/PostDetail";
 const Home = () => {
 	const [query, setQuery] = useState("");
 	const { documents: posts, loading, error } = useFetchDocuments("posts");
-
+	const navigate = useNavigate();
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (query) {
+			return navigate(`/search?q=${query}`);
+		}
 	};
+
 	return (
 		<div className={style.home}>
 			<h1>Veja os nossos posts mais recentes</h1>
@@ -27,7 +31,7 @@ const Home = () => {
 			</form>
 			<div>
 				{loading && <p>Carregando...</p>}
-				{posts && posts.map((post) => <PostDetail post={post} key={post.id}/>)}
+				{posts && posts.map((post) => <PostDetail post={post} key={post.id} />)}
 				{posts && posts.length === 0 && (
 					<div className={style.noposts}>
 						<p>Não foram encontrados posts</p>

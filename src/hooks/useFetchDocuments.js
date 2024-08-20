@@ -26,9 +26,13 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
 			try {
 				let q;
-				// busca
 				// dashboard
-				q = await query(collectionRef, orderBy("createdAt", "desc")); //Puxa todos os dados
+				if (search) {
+					// busca
+					q = await query(collectionRef, where("tags", "array-contains", search, orderBy("createdAt", "desc"))); //Puxa dados fazendo busca pelas tags
+				} else {
+					q = await query(collectionRef, orderBy("createdAt", "desc")); //Puxa todos os dados
+				}
 
 				await onSnapshot(q, (querySnapshot) => {
 					//Sempre que alterar pega novos dados
