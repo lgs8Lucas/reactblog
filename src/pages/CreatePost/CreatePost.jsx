@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../context/AuthContext";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
+import PostDetail from "../../components/PostDetail.jsx";
 const initialPost = {
 	title: "",
 	img: "",
@@ -15,6 +16,7 @@ const initialPost = {
 const CreatePost = () => {
 	const [post, setPost] = useState(initialPost);
 	const [formError, setFormError] = useState("");
+	const [show, setShow] = useState(false);
 
 	const { insertDocument, response } = useInsertDocument("posts");
 
@@ -33,13 +35,15 @@ const CreatePost = () => {
 		setFormError("");
 
 		//Criar array de tags
-		const tagsArray = post.tags.split(",").map(tag => tag.trim().toLowerCase())
-		
+		const tagsArray = post.tags
+			.split(",")
+			.map((tag) => tag.trim().toLowerCase());
+
 		//Checar valores
 		if (!post.title || !post.tags || !post.body) {
-			setFormError("Por favor, preencha todos os campos requiridos!")
+			setFormError("Por favor, preencha todos os campos requiridos!");
 		}
-		
+
 		let doc = {
 			title: post.title,
 			body: post.body,
@@ -52,10 +56,11 @@ const CreatePost = () => {
 			//validar URL da imagem
 			try {
 				new URL(post.img);
-				doc = {...doc, img:post.img}
+				doc = { ...doc, img: post.img };
 			} catch (error) {
-				setFormError("Por favor insira uma url de imagem válida ou deixe o campo de imagem vazio!");
-				
+				setFormError(
+					"Por favor insira uma url de imagem válida ou deixe o campo de imagem vazio!"
+				);
 			}
 		}
 
@@ -64,7 +69,7 @@ const CreatePost = () => {
 		insertDocument(doc);
 
 		//Redirect
-		navigate('/')
+		navigate("/");
 	};
 
 	return (
@@ -116,9 +121,25 @@ const CreatePost = () => {
 				<button type="submit" className="btn" disabled={response.loading}>
 					{response.loading ? "Aguarde" : "Postar"}
 				</button>
+				<button
+					className="btn btn-dark ms-1"
+					onClick={(e) => {
+						e.preventDefault()
+						document.querySelector("#modal").showModal();
+					}}
+				>
+					Preview
+				</button>
 				{response.error && <p className="error">{response.error}</p>}
 				{formError && <p className="error">{formError}</p>}
 			</form>
+			<dialog className={styles.modal} id="modal">
+				<PostDetail post={{...post, createdby:"você"}} disabled={true} />
+				<hr />
+				<button className="btn btn-outline" onClick={e=>{
+					document.querySelector("#modal").close()
+				}}>Fechar</button>
+			</dialog>
 		</div>
 	);
 };

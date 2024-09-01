@@ -116,3 +116,7 @@ button[disabled]{
   padding: 5px;
   border-radius: 5px;
 }
+
+.ms-1{
+  margin-left: 1em;
+}
